@@ -28,3 +28,9 @@ SELECT * FROM employees WHERE firstName REGEXP "^[a-h]|lie$";
 
 -- customers whose phone numbers ends with 55
 SELECT * FROM customers WHERE phone REGEXP "55$";
+
+-- Query the list of CITY names from STATION which have vowels (i.e., a, e, i, o, and u) as both their first and last characters. Your result cannot contain duplicates.
+select distinct city from station where city regexp "^[aeiou].*[aeiou]$"; --  .* this works for both and,or
+
+-- Query the list of CITY names from STATION that do not start with vowels and do not end with vowels. Your result cannot contain duplicates.
+select distinct city from station where city not regexp "^[aeiou]" and city not regexp "[aeiou]$" ;
