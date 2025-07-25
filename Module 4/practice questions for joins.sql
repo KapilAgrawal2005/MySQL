@@ -71,4 +71,34 @@ group by employeeNumber
 order by employeeNumber;
 
 
+-- country wise => count of orders from each country 
+select 	country,
+		count(*) as "Total orders from the country"
+from orders
+join customers using (customerNumber)
+group by country;
 
+
+
+-- country wise => count of orders from each country on each date
+select 	country,
+		count(*) as "Total orders from the country",
+        orderDate
+from orders
+join customers using (customerNumber)
+group by country, orderDate
+order by orderDate;
+
+
+-- find customers whose total order value > 80,000 across all the orders
+select 	customerNumber,
+		contactFirstName,
+		count(orderNumber) as "Total orders",
+        sum(quantityOrdered*priceEach) as totalOrderPrice
+from orders
+join customers using (customerNumber)
+join orderdetails using (orderNumber)
+where country = "france"
+group by customerNumber
+having totalOrderPrice > 80000
+order by totalOrderPrice;
