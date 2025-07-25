@@ -8,6 +8,7 @@ join customers c using (customerNumber)
 where paymentDate > "2003-06-13" 
 group by customerNumber;
 
+
 -- value of each unique order sorted by total order value
 select o.orderNumber, 
 		sum(quantityOrdered * priceEach) as perOrderValue 
@@ -15,6 +16,7 @@ from orders o
 join orderdetails using (orderNumber) 
 group by orderNumber 
 order by perOrderValue;
+
 
 -- value of each unique order and it's customernumber, customer name sorted by total order value
 select  customerNumber,
