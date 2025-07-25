@@ -44,4 +44,31 @@ join orders o using (customerNumber)
 join orderdetails using (orderNumber)
 group by orderNumber
 order by perOrderValue desc;
- 
+
+
+-- the number of orders placed by each customers and it's  sales employee
+select customerNumber as "Customer ID",
+		contactFirstName as "Customer Name",
+		count(orderNumber) as "Order Count",
+        employeeNumber,
+        firstName
+from customers
+join orders using (customerNumber)
+join employees 
+	on customers.salesRepEmployeeNumber = employees.employeeNumber
+group by customerNumber;
+
+
+-- count of orders through each sales representative
+select 	employeeNumber,
+		firstName,
+        count(orderNumber)
+from employees
+join customers
+	on employees.employeeNumber = customers.salesRepEmployeeNumber
+join orders using (customerNumber)
+group by employeeNumber
+order by employeeNumber;
+
+
+
